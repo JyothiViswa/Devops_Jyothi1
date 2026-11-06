@@ -1,0 +1,15 @@
+# Git version control
+.git
+.gitignore
+
+# Docker files
+Dockerfile
+.dockerignore
+
+# Local development / environment files
+.env
+*.log
+
+# Operating system generated files
+.DS_Store
+Thumbs.db
