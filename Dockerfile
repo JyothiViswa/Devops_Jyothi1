@@ -1,4 +1,4 @@
-```dockerfile
+
 # Use an official Node.js image as the base
 FROM node:18-alpine
 
@@ -14,4 +14,4 @@ COPY . .
 
 # Command to run your tests
 CMD ["npm", "test"]
-```
+
