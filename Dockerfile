@@ -15,3 +15,4 @@ RUN apt-get update && apt-get install -y nodejs npm
 
 # Install project dependencies
 RUN npm install
+
