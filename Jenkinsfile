@@ -11,7 +11,7 @@ pipeline {
             steps {
                 echo "Pulling code from GitHub repository..."
                 // Explicitly clones your repository and branch
-                git branch: 'master', url: 'https://github.com/JyothiViswa/Devops_Jyothi1.git'
+                git branch: 'develop', url: 'https://github.com/JyothiViswa/Devops_Jyothi1.git'
                 
                 echo "Building Docker image from Dockerfile..."
                 sh "docker build -t ${IMAGE_NAME}:${env.BUILD_NUMBER} ."
