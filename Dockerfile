@@ -9,5 +9,3 @@ WORKDIR /var/www/html
 
 # Copy your latest code into the required path
 COPY . /var/www/html/
-
-#
