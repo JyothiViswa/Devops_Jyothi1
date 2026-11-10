@@ -11,4 +11,4 @@ WORKDIR /var/www/html
 COPY . /var/www/html/
 
 #update package list and install the npm and node.js
-RUN apt-get updates && apt-get install -y nodejs npm
+RUN apt-get update && apt-get install -y nodejs npm
