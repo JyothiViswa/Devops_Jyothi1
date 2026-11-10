@@ -1,18 +1,17 @@
-# ==========================================
-# Stage 1: Build / Dependencies Stage
-# ==========================================
-# Use hshar/webapp base image for your tech stack 
-FROM hshar/webapp:latest
+```dockerfile
+# Use an official Node.js image as the base
+FROM node:18-alpine
 
 # Set the working directory inside the container
 WORKDIR /var/www/html
 
-# Copy your latest code into the required path
-COPY . /var/www/html/
-
-# Update package list and install Node.js and npm
-RUN apt-get update && apt-get install -y nodejs npm
-
-# Install project dependencies
+# Copy package files and install dependencies
+COPY package*.json ./
 RUN npm install
 
+# Copy the rest of your application code
+COPY . .
+
+# Command to run your tests
+CMD ["npm", "test"]
+```
