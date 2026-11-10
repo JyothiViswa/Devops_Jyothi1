@@ -21,7 +21,7 @@ pipeline {
         stage('Job2 : test') {
             steps {
                 echo "Running test suite on the containerized product..."
-                sh "docker run --rm ${IMAGE_NAME}:${env.BUILD_NUMBER}"
+                sh "docker run --rm ${IMAGE_NAME}:${env.BUILD_NUMBER} npm test"
             }
         }
     }
