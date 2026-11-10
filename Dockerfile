@@ -10,5 +10,8 @@ WORKDIR /var/www/html
 # Copy your latest code into the required path
 COPY . /var/www/html/
 
-#update package list and install the npm and node.js
+# Update package list and install Node.js and npm
 RUN apt-get update && apt-get install -y nodejs npm
+
+# Install project dependencies
+RUN npm install
