@@ -20,7 +20,7 @@ pipeline {
 
         stage('Job2 : test') {
             steps {
-                sh '''
+                sh """
                     echo "Starting container for testing..."
                     docker run -d --name temp-webapp-test -p 8081:80 ${IMAGE_NAME}:${env.BUILD_NUMBER}
 
@@ -33,7 +33,7 @@ pipeline {
                     # Clean up the test container
                     docker stop temp-webapp-test
                     docker rm temp-webapp-test
-                '''
+                """
             }
         }
 
