@@ -38,12 +38,9 @@ pipeline {
         }
 
         stage('Job3 : prod') {
-            when {
-                branch 'master'
-            }
             steps {
                 echo "Pushing and pulling image to production server..."
-                sh '''
+                sh """
                     # Optional: Login to Docker Hub if your repository is private
                     # echo "${DOCKER_HUB_PASSWORD}" | docker login -u "${DOCKER_REGISTRY_CREDENTIALS}" --password-stdin
 
@@ -63,7 +60,7 @@ pipeline {
                     docker run -d --name production-webapp -p 80:80 ${DOCKER_HUB_REPO}:latest
                     
                     echo "Production deployment completed successfully!"
-                '''
+                """
             }
         }
     }
