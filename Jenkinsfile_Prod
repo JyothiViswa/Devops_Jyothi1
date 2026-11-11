@@ -3,7 +3,6 @@ pipeline {
 
     environment {
         IMAGE_NAME = "webapp-app"
-        DOCKER_REGISTRY_CREDENTIALS = "jyothihelios"
         DOCKER_HUB_REPO = "jyothihelios/webapp-app" 
     }
 
@@ -40,27 +39,29 @@ pipeline {
         stage('Job3 : prod') {
             steps {
                 echo "Pushing and pulling image to production server..."
-                sh """
-                    # Optional: Login to Docker Hub if your repository is private
-                    echo "${Learning1664$$}" | docker login -u "${jyothihelios}" --password-stdin
+                withCredentials([usernamePassword(credentialsId: 'Docker_Hub', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                    sh '''
+                        # Login to Docker Hub securely using the stored credentials
+                        echo "${DOCKER_PASS}" | docker login -u "${DOCKER_USER}" --password-stdin
 
-                    echo "Tagging image for Docker Hub..."
-                    docker tag ${IMAGE_NAME}:${env.BUILD_NUMBER} ${DOCKER_HUB_REPO}:latest
+                        echo "Tagging image for Docker Hub..."
+                        docker tag ${IMAGE_NAME}:${env.BUILD_NUMBER} ${DOCKER_HUB_REPO}:latest
 
-                    echo "Pushing image to Docker Hub registry..."
-                    docker push ${DOCKER_HUB_REPO}:latest
+                        echo "Pushing image to Docker Hub registry..."
+                        docker push ${DOCKER_HUB_REPO}:latest
 
-                    echo "Deploying to production container server..."
-                    # Stop and remove any existing production container safely
-                    docker stop production-webapp || true
-                    docker rm production-webapp || true
+                        echo "Deploying to production container server..."
+                        # Stop and remove any existing production container safely
+                        docker stop production-webapp || true
+                        docker rm production-webapp || true
 
-                    echo "Pulling latest image from registry and running production container..."
-                    docker pull ${DOCKER_HUB_REPO}:latest
-                    docker run -d --name production-webapp -p 80:80 ${DOCKER_HUB_REPO}:latest
-                    
-                    echo "Production deployment completed successfully!"
-                """
+                        echo "Pulling latest image from registry and running production container..."
+                        docker pull ${DOCKER_HUB_REPO}:latest
+                        docker run -d --name production-webapp -p 80:80 ${DOCKER_HUB_REPO}:latest
+                        
+                        echo "Production deployment completed successfully!"
+                    '''
+                }
             }
         }
     }
