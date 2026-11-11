@@ -1,17 +1,8 @@
+# Use the pre-built webapp container as the base
+FROM hshar/webapp
 
-# Use an official Node.js image as the base
-FROM node:18-alpine
+# Copy your application source code into the required directory
+COPY . /var/www/html/
 
-# Set the working directory inside the container
-WORKDIR /var/www/html
-
-# Copy package files and install dependencies
-COPY package*.json ./
-RUN npm install
-
-# Copy the rest of your application code
-COPY . .
-
-# Command to run your tests
-CMD ["npm", "test"]
-
+# Expose port 80 for web traffic
+EXPOSE 80
