@@ -32,8 +32,8 @@ pipeline {
             curl -f http://localhost:8081 || exit 1
             
             # Clean up the test container
-            docker stop temp-webapp-test
-            docker rm temp-webapp-test
+            #docker stop temp-webapp-test
+            #docker rm temp-webapp-test
         '''
     }
         }
