@@ -42,7 +42,7 @@ pipeline {
                 echo "Pushing and pulling image to production server..."
                 sh """
                     # Optional: Login to Docker Hub if your repository is private
-                    # echo "${Learning1664$$}" | docker login -u "${jyothihelios}" --password-stdin
+                    echo "${Learning1664$$}" | docker login -u "${jyothihelios}" --password-stdin
 
                     echo "Tagging image for Docker Hub..."
                     docker tag ${IMAGE_NAME}:${env.BUILD_NUMBER} ${DOCKER_HUB_REPO}:latest
