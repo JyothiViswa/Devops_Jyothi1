@@ -46,9 +46,11 @@ pipeline {
 
                         echo "Tagging image for Docker Hub..."
                         docker tag ${IMAGE_NAME}:${BUILD_NUMBER} ${DOCKER_HUB_REPO}:latest
+                        docker tag ${IMAGE_NAME}:${BUILD_NUMBER} ${DOCKER_HUB_REPO}:${BUILD_NUMBER}
 
                         echo "Pushing image to Docker Hub registry..."
                         docker push ${DOCKER_HUB_REPO}:latest
+                        docker push ${DOCKER_HUB_REPO}:${BUILD_NUMBER}
 
                         echo "Deploying to production container server..."
                         # Stop and remove any existing production container safely
