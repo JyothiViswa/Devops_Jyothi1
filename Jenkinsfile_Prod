@@ -45,7 +45,7 @@ pipeline {
                         echo "${DOCKER_PASS}" | docker login -u "${DOCKER_USER}" --password-stdin
 
                         echo "Tagging image for Docker Hub..."
-                        docker tag ${IMAGE_NAME}:${env.BUILD_NUMBER} ${DOCKER_HUB_REPO}:latest
+                        docker tag ${IMAGE_NAME}:${BUILD_NUMBER} ${DOCKER_HUB_REPO}:latest
 
                         echo "Pushing image to Docker Hub registry..."
                         docker push ${DOCKER_HUB_REPO}:latest
