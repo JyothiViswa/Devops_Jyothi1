@@ -40,7 +40,7 @@ pipeline {
             steps {
                 echo "Pushing and pulling image to production server..."
                 withCredentials([usernamePassword(credentialsId: 'Docker_Hub', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
-                    sh '''
+                    sh """
                         # Login to Docker Hub securely using the stored credentials
                         echo "${DOCKER_PASS}" | docker login -u "${DOCKER_USER}" --password-stdin
 
@@ -60,7 +60,7 @@ pipeline {
                         docker run -d --name production-webapp -p 80:80 ${DOCKER_HUB_REPO}:latest
                         
                         echo "Production deployment completed successfully!"
-                    '''
+                    """
                 }
             }
         }
